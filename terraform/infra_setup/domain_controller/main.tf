@@ -17,7 +17,7 @@ resource "aws_instance" "domain_controller" {
   instance_type = var.domain_controller_instance_type
   vpc_security_group_ids = [ var.domain_controller_secgroup_id ]
   key_name = var.domain_controller_ssh_keypair
-  user_data              = templatefile("${path.module}/template_file/windows-target.tftpl", { admin_pass = "LongPassword12345!" })
+  user_data              = templatefile("${path.module}/template_file/domain_controller.tftpl", { admin_pass = "LongPassword12345!" })
   tags = {
     Name = "${var.unique_name}-k8s-cluster"
     app = "kubernetes"
