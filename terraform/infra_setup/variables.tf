@@ -43,6 +43,11 @@ variable "create_k8s" {
   default = true
 }
 
+variable "create_domain_controller" {
+  type = bool
+  default = true
+}
+
 variable "admin_ip_additional" {
   type = string
   default = ""

@@ -89,8 +89,21 @@ module "k8s_cluster" {
   k8s_nodeport_lb_vpc = module.aws_infra.aws_vpc
 }
 
+module "domain_controller" {
+  depends_on = [ module.aws_infra, module.boundary_setup ]
+  source = "./domain_controller"
+  unique_name = local.unique_name
+  aws_region = var.aws_region
+  aws_vpc = module.aws_infra.aws_vpc
+  aws_ami = module.aws_infra.aws_ami_windows
+  domain_controller_instance_type = var.aws_k8s_node_instance_type
+  domain_controller_subnet_id = module.aws_infra.aws_subnet_private_id
+  domain_controller_secgroup_id = module.aws_infra.aws_secgroup_private_id
+  domain_controller_ssh_keypair = module.aws_infra.aws_ssh_keypair_app_infra
+}
+
 module "vault_server" {
-  depends_on = [ module.postgres, module.k8s_cluster ]
+  depends_on = [ module.postgres, module.k8s_cluster, module.domain_controller ]
   source = "./vault_server"
   unique_name = local.unique_name
   aws_region = var.aws_region
