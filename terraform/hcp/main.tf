@@ -28,10 +28,18 @@ resource "hcp_boundary_cluster" "boundary_demo" {
   tier = "Plus"
 }
 
+resource "time_sleep" "wait_for_boundary" {
+  depends_on = [ hcp_boundary_cluster.boundary_demo ]
+
+  create_duration = "30s"
+}
+
 data "http" "boundary_cluster_auth_methods" {
   url = "${hcp_boundary_cluster.boundary_demo.cluster_url}/v1/auth-methods?scope_id=global"
   depends_on = [ hcp_boundary_cluster.boundary_demo ]
 }
+
+
 
 locals {
   unique_name = coalesce(var.unique_name, "${random_pet.unique_name.id}-${substr(random_integer.unique_name.result, -6, -1)}")
