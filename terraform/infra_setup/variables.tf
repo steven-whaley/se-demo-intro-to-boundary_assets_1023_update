@@ -33,6 +33,11 @@ variable "aws_postgres_node_instance_type" {
   default = "t3.medium"
 }
 
+variable "aws_domain_controller_node_instance_type" {
+  type = string
+  default = "t3.small"
+}
+
 variable "create_postgres" {
   type = bool
   default = true
