@@ -35,9 +35,8 @@ resource "time_sleep" "wait_for_boundary" {
 }
 
 data "http" "boundary_cluster_auth_methods" {
-  depends_on = [ time_sleep.wait_for_boundary ]
+  depends_on = [ time_sleep.wait_for_boundary, hcp_boundary_cluster.boundary_demo ]
   url = "${hcp_boundary_cluster.boundary_demo.cluster_url}/v1/auth-methods?scope_id=global"
-  depends_on = [ hcp_boundary_cluster.boundary_demo ]
 }
 
 
