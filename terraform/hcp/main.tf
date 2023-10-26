@@ -31,15 +31,13 @@ resource "hcp_boundary_cluster" "boundary_demo" {
 resource "time_sleep" "wait_for_boundary" {
   depends_on = [ hcp_boundary_cluster.boundary_demo ]
 
-  create_duration = "15s"
+  create_duration = "30s"
 }
 
 data "http" "boundary_cluster_auth_methods" {
   depends_on = [ time_sleep.wait_for_boundary, hcp_boundary_cluster.boundary_demo ]
   url = "${hcp_boundary_cluster.boundary_demo.cluster_url}/v1/auth-methods?scope_id=global"
 }
-
-
 
 locals {
   unique_name = coalesce(var.unique_name, "${random_pet.unique_name.id}-${substr(random_integer.unique_name.result, -6, -1)}")
