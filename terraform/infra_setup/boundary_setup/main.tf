@@ -47,7 +47,7 @@ locals {
     [Service]
     ProtectSystem=off
     ExecStart=
-    ExecStart=/usr/bin/boundary-worker server -config=/etc/boundary.d/boundary-pki-worker-config.hcl
+    ExecStart=/usr/bin/boundary server -config=/etc/boundary.d/boundary-pki-worker-config.hcl
     WORKER_UNIT_DROPIN
 
   boundary_instance_worker_config = <<-WORKER_CONFIG
@@ -123,7 +123,7 @@ locals {
       [ "apt", "update" ],
       [ "sh", "-c", "UCF_FORCE_CONFFOLD=true apt upgrade -y" ],
       [ "mkdir", "/etc/boundary-worker-data" ],
-      [ "apt", "install", "-y", "bind9-dnsutils", "jq", "curl", "unzip", "docker-compose", "boundary-worker-hcp" ],
+      [ "apt", "install", "-y", "bind9-dnsutils", "jq", "curl", "unzip", "docker-compose", "boundary-enterprise" ],
       [ "chown", "boundary:boundary", "/etc/boundary-worker-data" ],
       [ "sh", "-c", "curl -Ss https://checkip.amazonaws.com > /etc/public_ip" ],
       [ "sh", "-c", "host -t PTR $(curl -Ss https://checkip.amazonaws.com) | awk '{print substr($NF, 1, length($NF)-1)}' > /etc/public_dns" ],

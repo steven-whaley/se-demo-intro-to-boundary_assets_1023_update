@@ -67,3 +67,8 @@ output "vault_server" {
   description = "The Vault server hostname and IP created."
   value = module.vault_server.dns
 }
+
+output "domain_controller" {
+  description = "The Domain Controller hostname and IP created."
+  value = module.domain_controller.dns
+}
