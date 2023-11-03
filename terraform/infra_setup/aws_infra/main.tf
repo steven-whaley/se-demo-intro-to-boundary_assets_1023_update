@@ -174,12 +174,12 @@ resource "aws_route_table_association" "boundary_demo_private" {
 
 # Create bucket for session recording
 resource "random_string" "boundary_bucket_suffix" {
-  length  = 6
+  length  = 8
   special = false
   upper   = false
 }
 
 resource "aws_s3_bucket" "boundary_recording_bucket" {
-  bucket        = "boundary-recording-bucket"
+  bucket        = "boundary-recording-bucket-${random_string.result}"
   force_destroy = true
 }
