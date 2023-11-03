@@ -171,3 +171,15 @@ resource "aws_route_table_association" "boundary_demo_private" {
   subnet_id      = aws_subnet.boundary_demo_private.id
   route_table_id = aws_route_table.boundary_demo_private.id
 }
+
+# Create bucket for session recording
+resource "random_string" "boundary_bucket_suffix" {
+  length  = 6
+  special = false
+  upper   = false
+}
+
+resource "aws_s3_bucket" "boundary_recording_bucket" {
+  bucket        = "boundary-recording-bucket"
+  force_destroy = true
+}
