@@ -1,5 +1,5 @@
 variable "unique_name" {
-  type = string
+  type    = string
   default = "example"
 }
 
@@ -16,7 +16,7 @@ variable "aws_ami" {
 }
 
 variable "create_domain_controller" {
-  type = bool
+  type    = bool
   default = true
 }
 
@@ -29,7 +29,7 @@ variable "domain_controller_secgroup_id" {
 }
 
 variable "domain_controller_instance_type" {
-  type = string
+  type    = string
   default = "t3.small"
 }
 
