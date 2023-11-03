@@ -180,6 +180,6 @@ resource "random_string" "boundary_bucket_suffix" {
 }
 
 resource "aws_s3_bucket" "boundary_recording_bucket" {
-  bucket        = "boundary-recording-bucket-${random_string.result}"
+  bucket        = "boundary-recording-bucket-${random_string.boundary_bucket_suffix.result}"
   force_destroy = true
 }

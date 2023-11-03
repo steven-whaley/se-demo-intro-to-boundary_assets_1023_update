@@ -72,3 +72,8 @@ output "domain_controller" {
   description = "The Domain Controller hostname and IP created."
   value       = module.domain_controller.dns
 }
+
+output "aws_bucket_name" {
+  description = "The name of the S3 bucket created to store Boundary Session Recordings"
+  value = module.aws_infra.aws_bucket_name
+}

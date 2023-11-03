@@ -42,3 +42,8 @@ output "app_infra_ssh_privkey" {
   description = "The raw content of the app infrastructure SSH private key."
   value       = tls_private_key.aws_infra_ssh_key.private_key_openssh
 }
+
+output "aws_bucket_name" {
+  description = "The name of the S3 bucket created to store Boundary Session Recordings"
+  value = aws_s3_bucket.boundary_recording_bucket.bucket
+}
