@@ -19,8 +19,8 @@ resource "aws_instance" "domain_controller" {
   key_name                    = var.domain_controller_ssh_keypair
   user_data                   = templatefile("${path.module}/template_file/domain_controller.tftpl", { admin_pass = "LongPassword12345!" })
   tags = {
-    Name   = "${var.unique_name}-k8s-cluster"
-    app    = "kubernetes"
+    Name   = "${var.unique_name}-domain-controller"
+    app    = "windows"
     region = "${var.aws_region}"
   }
 }
